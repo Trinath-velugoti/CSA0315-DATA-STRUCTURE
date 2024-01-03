@@ -11,8 +11,10 @@ struct node *head = NULL;
 
 void push(int val)
 {
+
     struct node *newNode = malloc(sizeof(struct node));
     newNode->data = val;
+
     newNode->next = head;
     head = newNode;
 }
@@ -26,14 +28,21 @@ void pop()
     else
     {
         printf("Poped element = %d\n", head->data);
+
         temp = head;
+
         head = head->next;
+
         free(temp);
     }
 }
+
+//print the linked list
 void printList()
 {
     struct node *temp = head;
+
+    //iterate the entire linked list and print the data
     while(temp != NULL)
     {
          printf("%d->", temp->data);

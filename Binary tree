@@ -1,0 +1,58 @@
+#include <stdio.h>
+#include <stdlib.h>
+
+struct Node {
+    int data;
+    struct Node* left;
+    struct Node* right;
+};
+
+struct Node* createNode(int data) {
+    struct Node* newNode = (struct Node*)malloc(sizeof(struct Node));
+    newNode->data = data;
+    newNode->left = NULL;
+    newNode->right = NULL;
+    return newNode;
+}
+
+struct Node* insert(struct Node* root, int data) {
+    if (root == NULL) {
+        return createNode(data);
+    } else {
+        int choice;
+        printf("Enter 1 to insert left or 2 to insert right: ");
+        scanf("%d", &choice);
+        switch (choice) {
+            case 1:
+                root->left = insert(root->left, data);
+                break;
+            case 2:
+                root->right = insert(root->right, data);
+                break;
+            default:
+                printf("Invalid choice\n");
+                break;
+        }
+        return root;
+    }
+}
+
+void inOrderTraversal(struct Node* root) {
+    if (root != NULL) {
+        inOrderTraversal(root->left);
+        printf("%d ", root->data);
+        inOrderTraversal(root->right);
+    }
+}
+
+int main() {
+    struct Node* root = NULL;
+    root = insert(root, 10);
+    insert(root, 5);
+    insert(root, 20);
+    insert(root, 3);
+    insert(root, 7);
+    printf("Inorder traversal of the binary tree: ");
+    inOrderTraversal(root);
+    return 0;
+}
